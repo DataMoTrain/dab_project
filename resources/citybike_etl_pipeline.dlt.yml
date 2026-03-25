@@ -1,0 +1,35 @@
+resources:
+  pipelines:
+    citibike_etl_pipeline:
+      name: citibike_etl_pipeline
+      configuration:
+        catalog: "${var.catalog}"
+      # clusters:
+      # - label: default
+      #   node_type_id: Standard_DS3_v2
+      #   driver_node_type_id: Standard_DS3_v2
+      #   num_workers: 5
+      clusters:
+        - label: default
+          autoscale:
+            min_workers: 1
+            max_workers: 5
+            mode: ENHANCED      
+      libraries:
+      - notebook:
+          path: ../citybike_etl/dlt/01_bronze/01_bronze_citibike.ipynb
+      - notebook:
+          path: ../citybike_etl/dlt/02_silver/02_silver_citibike.ipynb
+      - notebook:
+          path: ../citybike_etl/dlt/03_gold/03_gold_citibike_daily_ride_summary.ipynb
+      - notebook:
+          path: ../citybike_etl/dlt/03_gold/03_gold_citibike_daily_station_performance.ipynb
+      schema: default
+      development: "${var.dev_flag}"
+      continuous: false
+      photon: false
+      edition: ADVANCED
+      channel: CURRENT
+      catalog: "${var.catalog}"
+      serverless: false
+      # root_path: /Workspace/Users/mohsan.tahir3@gmail.com/citibike_etl_pipeline_internal
