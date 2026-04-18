@@ -48,10 +48,12 @@ targets:
         default: false
       schema: prod
     permissions:
-      - user_name: mohsan.tahir3@gmail.com
+      - service_principal_name: 626d29d2-f0bd-4c07-a331-7a790ca7a2bc
         level: CAN_MANAGE
     presets:
       name_prefix: '[testing] '
+    run_as:
+      service_principal_name: 626d29d2-f0bd-4c07-a331-7a790ca7a2bc
   prod:
     mode: production
     workspace:
@@ -64,5 +66,7 @@ targets:
       dev_flag:
         default: false
     permissions:
-      - user_name: mohsan.tahir3@gmail.com
+      - service_principal_name: 913142b9-a2fb-4b07-abf5-63015a7a51ad
         level: CAN_MANAGE
+    run_as:
+      service_principal_name: 913142b9-a2fb-4b07-abf5-63015a7a51ad
